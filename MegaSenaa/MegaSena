@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<time.h>
+
+
+
+
+int main(void) {
+    int i,j,x, aleatorio, condicao, maxLinha, maxColum, intervaloAleatorio, numTotal;
+		int sorteio[50][5];
+
+
+	maxLinha = 50;
+	maxColum = 6;
+	intervaloAleatorio = 60;
+	condicao = 1;
+  srand( (unsigned)time(NULL) );
+  printf("Gerando %d valores aleatorios:\n\n", maxLinha);
+  
+	for( i = 0; i < maxLinha; i++ ){
+		
+		for( j = 0; j < maxColum; j++ ){
+
+			aleatorio=1+(rand() % intervaloAleatorio);
+			
+			for( x = j; x > -1; x--){
+				if( aleatorio == sorteio[i][x]){
+					aleatorio = 1 + (rand() % intervaloAleatorio);
+					x = j;
+				}
+			}	
+			sorteio[i][j] = aleatorio;
+			printf("%d ", sorteio[i][j]);
+		} 
+		printf("\n");  
+	}
+
+	numTotal =0;
+
+for(x=1;x<=60;x++){
+	for( i = 0; i < maxLinha; i++ ){
+		for( j = 0; j < maxColum; j++ ){
+			if(sorteio[i][j] == x){
+				numTotal = numTotal+1;
+			}
+		}
+	}
+	printf("Numero %d = %d\n",x,numTotal);
+	numTotal = 0;
+}	
+  return 0;
+}
